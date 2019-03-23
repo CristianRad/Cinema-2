@@ -4,6 +4,7 @@ import Domain.Film;
 import Repository.IRepository;
 import Repository.InMemoryRepositoryException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilmService {
@@ -68,6 +69,21 @@ public class FilmService {
 
     public List<Film> getAllFilms() {
         return filmRepository.getAll();
+    }
+
+    /**
+     * Searches films whose fields contain a given text.
+     * @param text is the text searched for.
+     * @return a list of films whose fields contain text.
+     */
+
+    public List<Film> fullTextSearch(String text) {
+        List<Film> results = new ArrayList<>();
+        for (Film film : getAllFilms())
+            if (film.getTitle().contains(text) || Integer.toString(film.getYear()).contains(text) ||
+                Double.toString(film.getTicketPrice()).contains(text) || Boolean.toString(film.isOnScreen()).contains(text))
+                    results.add(film);
+        return results;
     }
 
     public IRepository<Film> getFilmRepository() { return filmRepository; }

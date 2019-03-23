@@ -36,6 +36,7 @@ public class Console {
         System.out.println("2. Update Film");
         System.out.println("3. Remove Film");
         System.out.println("4. Show All Films");
+        System.out.println("5. Search Films");
         System.out.println("x. Go Back");
     }
 
@@ -44,6 +45,7 @@ public class Console {
         System.out.println("2. Update Client");
         System.out.println("3. Remove Client");
         System.out.println("4. Show All Clients");
+        System.out.println("5. Search Clients");
         System.out.println("x. Go Back");
     }
 
@@ -52,6 +54,7 @@ public class Console {
         System.out.println("2. Update Reservation");
         System.out.println("3. Remove Reservation");
         System.out.println("4. Show All Reservations");
+        System.out.println("5. Search Reservations");
         System.out.println("x. Go Back");
     }
 
@@ -93,6 +96,9 @@ public class Console {
                     break;
                 case "4":
                     handleShowAllFilms();
+                    break;
+                case "5":
+                    runFilmsSearch();
                     break;
                 case "x":
                     return;
@@ -159,6 +165,14 @@ public class Console {
             System.out.println(film);
     }
 
+    private void runFilmsSearch() {
+        System.out.println("Dati cautarea:");
+        String text = scanner.nextLine();
+        System.out.println("Rezultatele cautarii sunt:");
+        for (Film film : filmService.fullTextSearch(text))
+            System.out.println(film);
+    }
+
     private void runClients() {
         while (true) {
             showMenuClients();
@@ -175,6 +189,9 @@ public class Console {
                     break;
                 case "4":
                     handleShowAllClients();
+                    break;
+                case "5":
+                    runClientsSearch();
                     break;
                 case "x":
                     return;
@@ -249,6 +266,14 @@ public class Console {
             System.out.println(client);
     }
 
+    private void runClientsSearch() {
+        System.out.println("Dati cautarea:");
+        String text = scanner.nextLine();
+        System.out.println("Rezultatele cautarii sunt:");
+        for (Client client : clientService.fullTextSearch(text))
+            System.out.println(client);
+    }
+
     private void runReservations() {
         while (true) {
             showMenuReservations();
@@ -265,6 +290,9 @@ public class Console {
                     break;
                 case "4":
                     handleShowAllReservations();
+                    break;
+                case "5":
+                    runReservationsSearch();
                     break;
                 case "x":
                     return;
@@ -330,6 +358,14 @@ public class Console {
 
     private void handleShowAllReservations() {
         for (Reservation reservation : reservationService.getAllReservations())
+            System.out.println(reservation);
+    }
+
+    private void runReservationsSearch() {
+        System.out.println("Dati cautarea:");
+        String text = scanner.nextLine();
+        System.out.println("Rezultatele cautarii sunt:");
+        for (Reservation reservation : reservationService.fullTextSearch(text))
             System.out.println(reservation);
     }
 

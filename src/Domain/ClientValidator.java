@@ -30,7 +30,7 @@ public class ClientValidator implements IValidator<Client> {
 
         if (dayOfBirth < 1 || dayOfBirth > 31)
             errors += "The day of birth must be between 1 and 31!\n";
-        if (monthOfBirth < 1 || dayOfBirth > 12)
+        if (monthOfBirth < 1 || monthOfBirth > 12)
             errors += "The month of birth must be between 1 and 12!\n";
         if (yearOfBirth < 1920 || yearOfBirth > Calendar.getInstance().get(Calendar.YEAR))
             errors += "The year of birth must be between 1920 and " + Calendar.getInstance().get(Calendar.YEAR) + "!\n";

@@ -2,7 +2,6 @@ package Domain;
 
 public class Film extends Entity {
 
-    private String id;
     private String title;
     private int year;
     private double ticketPrice;
@@ -10,7 +9,6 @@ public class Film extends Entity {
 
     public Film(String id, String title, int year, double ticketPrice, boolean onScreen) {
         super(id);
-        this.id = id;
         this.title = title;
         this.year = year;
         this.ticketPrice = ticketPrice;

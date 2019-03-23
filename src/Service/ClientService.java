@@ -4,6 +4,7 @@ import Domain.Client;
 import Repository.IRepository;
 import Repository.InMemoryRepositoryException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientService {
@@ -72,6 +73,21 @@ public class ClientService {
 
     public List<Client> getAllClients() {
         return clientRepository.getAll();
+    }
+
+    /**
+     * Searches clients whose fields contain a given text.
+     * @param text is the text searched for.
+     * @return a list of clients whose fields contain text.
+     */
+
+    public List<Client> fullTextSearch(String text) {
+        List<Client> results = new ArrayList<>();
+        for (Client client : getAllClients())
+            if (client.getName().contains(text) || client.getSurname().contains(text) || client.getCnp().contains(text) ||
+                client.getBirthday().contains(text) || client.getRegistrationDay().contains(text) || Integer.toString(client.getPoints()).contains(text))
+                    results.add(client);
+        return results;
     }
 
     public IRepository<Client> getClientRepository() { return clientRepository; }

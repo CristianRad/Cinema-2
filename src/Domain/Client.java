@@ -2,7 +2,6 @@ package Domain;
 
 public class Client extends Entity {
 
-    private String id;
     private String name, surname;
     private String cnp;
     private String birthday, registrationDay;
@@ -10,7 +9,6 @@ public class Client extends Entity {
 
     public Client(String id, String name, String surname, String cnp, String birthday, String registrationDay, int points) {
         super(id);
-        this.id = id;
         this.name = name;
         this.surname = surname;
         this.cnp = cnp;

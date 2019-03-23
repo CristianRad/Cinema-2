@@ -6,6 +6,7 @@ import Domain.Reservation;
 import Repository.IRepository;
 import Repository.InMemoryRepositoryException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationService {
@@ -86,6 +87,21 @@ public class ReservationService {
 
     public List<Reservation> getAllReservations() {
         return reservationRepository.getAll();
+    }
+
+    /**
+     * Searches reservations whose fields contain a given text.
+     * @param text is the text searched for.
+     * @return a list of reservations whose fields contain text.
+     */
+
+    public List<Reservation> fullTextSearch(String text) {
+        List<Reservation> results = new ArrayList<>();
+        for (Reservation reservation : getAllReservations())
+            if (reservation.getIdFilm().contains(text) || reservation.getIdCardClient().contains(text) ||
+                reservation.getDate().contains(text) || reservation.getTime().contains(text))
+                    results.add(reservation);
+        return results;
     }
 
 }

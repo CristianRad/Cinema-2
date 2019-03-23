@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public abstract class Entity {
 
-    private String id;
+    protected String id;
 
     public Entity(String id) { this.id = id; }
 

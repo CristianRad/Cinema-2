@@ -1,14 +1,13 @@
-package Tests.Domain.Repository;
+package Tests.Repository;
 
 import Domain.*;
 import Repository.IRepository;
 import Repository.InMemoryRepository;
-import Repository.InMemoryRepositoryException;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class InMemoryRepositoryTest {
 
@@ -21,7 +20,6 @@ public class InMemoryRepositoryTest {
     private IRepository<Reservation> reservationRepository = new InMemoryRepository<>(reservationValidator);
 
     private Film film = new Film("1","Heroes",1995,60.0,true);
-    private Film sameFilm = new Film("1","Heroes",1995,60.0,true);
 
     private Client client = new Client("10","Vlad","Rus","1234567891001","22.07.2000","14.01.2017",55);
     private Client newClient = new Client("10","Alin","Pop","1900712124938","12.07.1990","17.03.2014",80);
@@ -29,12 +27,11 @@ public class InMemoryRepositoryTest {
     private Reservation reservation = new Reservation("1","1","10","12.10.2012","15:00");
 
     @Test
-    public void getIdFilm() {
+    public void findFilmById() {
         filmRepository.insert(film);
-        clientRepository.insert(client);
         reservationRepository.insert(reservation);
 
-        assertEquals("1", reservationRepository.getStorage().get(0).getIdFilm());
+        assertEquals(film, filmRepository.findById(reservation.getIdFilm()));
     }
 
     @Test
@@ -56,13 +53,6 @@ public class InMemoryRepositoryTest {
 
         assertEquals(1, allReservations.size());
         assertEquals(reservation, allReservations.get(0));
-
-        try {
-            filmRepository.insert(sameFilm);
-            fail ("Exception not thrown for duplicate film ID!");
-        } catch (InMemoryRepositoryException error) {
-            assertTrue(true);
-        }
     }
 
     @Test

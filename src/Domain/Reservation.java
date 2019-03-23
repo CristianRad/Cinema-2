@@ -2,7 +2,6 @@ package Domain;
 
 public class Reservation extends Entity {
 
-    private String id;
     private String idFilm;
     private String idCardClient;
     private String date;
@@ -10,7 +9,6 @@ public class Reservation extends Entity {
 
     public Reservation(String id, String idFilm, String idCardClient, String date, String time) {
         super(id);
-        this.id = id;
         this.idFilm = idFilm;
         this.idCardClient = idCardClient;
         this.date = date;
